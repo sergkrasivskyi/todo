@@ -6,21 +6,43 @@
       <ToDoItemHeader space-type="50" />
       <!-- loop have been here -->
       <ToDoItem space-type="50"
+        v-for="item in tasksList"
+        :key="item.id"
+        :taskDate="item.date"
+        :taskTitle="item.title"
+        @click="toEditTaskScreen(item)"
       ></ToDoItem>
+
       <!-- end loop -->
       <ToDoButton class="accent-400 bg-primary-200" space-type="300">Load more...</ToDoButton>
-
     </div>
-    <ToDoBottomBar class="flex-bottom" space-type="550"></ToDoBottomBar>
+    <ToDoBottomBar class="flex-bottom" space-type="550"
+      @addTaskClick="addTask"
+    ></ToDoBottomBar>
   </div>
 </template>
 
 <script>
+import { toDosList } from '@/main'
 export default {
   name: 'ToDoHomeScreen',
   data() {
     return {
-      // taskDate: 03-10-2022,
+    }
+  },
+  methods: {
+    addTask() {
+      this.$emit('addTask')
+    },
+    toEditTaskScreen(item) {
+      this.$emit('editTask', item)
+      toDosList.toEditTask = {...item}
+    }
+
+  },
+  computed: {
+    tasksList() {
+      return toDosList.taskList;
     }
   },
 }

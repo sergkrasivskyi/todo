@@ -1,10 +1,15 @@
 <template>
-    <button ><slot></slot> </button>
+    <button @click="clickButton"><slot></slot> </button>
 </template>
 
 <script>
   export default {
-  name: 'ToDoButton'
+  name: 'ToDoButton',
+  methods: {
+    clickButton() {
+      this.$emit('clickButton')
+    }
+  },
   }
 </script>
 

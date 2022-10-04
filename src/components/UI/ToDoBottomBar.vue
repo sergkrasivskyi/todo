@@ -1,12 +1,19 @@
 <template>
     <div class="wrapper-bar">
-      <ToDoIconAddItem class="center-in-bar"></ToDoIconAddItem>
+      <ToDoIconAddItem class="center-in-bar"
+      @click="addTaskClick"
+      ></ToDoIconAddItem>
     </div>
 </template>
 
 <script>
   export default {
-  name: 'ToDoBottomBar'
+  name: 'ToDoBottomBar',
+  methods: {
+    addTaskClick() {
+      this.$emit('addTaskClick')
+    }
+  },
   }
 </script>
 
@@ -23,5 +30,6 @@
 .center-in-bar {
   position: relative;
   bottom: 50%;
+  cursor: pointer;
 }
 </style>

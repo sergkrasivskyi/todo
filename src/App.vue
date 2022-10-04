@@ -1,9 +1,9 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-// import {ToDoSplash} from '@/components'
-// import { ToDoAlert, ToDoAppBar, ToDoBottomBar, ToDoButton, ToDoControlsHome, ToDoFormInput, ToDoHeaderAppBar, ToDoItem, ToDoItemHeader} from '@/components/UI'
-
+import { storeToRefs } from 'pinia'
 import ToDoListView from '@/views/ToDoListView.vue'
+import { pinia, useToDoList } from "@/store/ToDoListStore";
+
 </script>
 
 <template>
@@ -19,14 +19,8 @@ import ToDoListView from '@/views/ToDoListView.vue'
 </template>
 
 <style lang="scss">
-$accent-color-200: #C1CC41;
-$accent-color-400: #1AB8DB;
-$accent-color-600: #FF0000;
-$primary-color-200: #FFFFFF;
-$primary-color-400: #000000;
-$neutral-color-200: #EEEEEE;
-$neutral-color-400: #D9D9D9;
-$width: 23.44rem;
+@import "@/assets/variables.scss";
+@import "@/assets/utility.scss";
 
 header {
   line-height: 1.5;

@@ -1,6 +1,7 @@
 .container {
   padding-inline: 1rem;
   margin: 0 auto;
+  width: 100%;
 }
 .bg-accent-200 {
   background-color: $accent-color-200;
@@ -66,4 +67,7 @@
   font-weight: 600;
   font-size: 1rem;
   line-height: 1.2;
+}
+.wide {
+  width: 100%;
 }

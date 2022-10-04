@@ -1,26 +1,57 @@
 <template>
   <div class="wrapper">
-    <ToDoSplash v-if="isStart"></ToDoSplash>
-    <ToDoHomeScreen v-else-if="isHomeScreen"></ToDoHomeScreen>
-    <ToDoAddTaskScreen v-else-if="isAddTaskScreen"></ToDoAddTaskScreen>
-    <ToDoEditTaskScreen v-else-if="isEditTaskScreen"></ToDoEditTaskScreen>
+    <!-- Splash Screen -->
+    <ToDoSplash v-if="isSplash"
+      @startToDo="viewToDoHomeScreen"/>
+    <!-- Home Screen -->
+    <ToDoHomeScreen v-else-if="isHomeScreen"
+      @addTask="viewToDoAddTaskScreen"
+      @editTask="viewToDoEditTaskScreen"/>
+    
+    <!-- AddTask Screen -->
+    <ToDoAddTaskScreen v-else-if="isAddTaskScreen"
+      @cancelAddPage="viewToDoHomeScreen"/>
+    
+    <!-- EditTask Screen -->
+    <ToDoEditTaskScreen v-else-if="isEditTaskScreen"
+      :toUpdateTask="toUpdateTask"
+    />
+    <!-- Delete Alert Screen -->
+    <ToDoDeleteAlert v-else-if="isToDoDeleteAlert"/>
+    
   </div>
 
 </template>
 
 <script>
-// import ToDoSplash from '@/components/ToDoSplash.vue'
-// import ToDoHomeScreen from '@/components/ToDoHomeScreen.vue'
 export default {
-  // components: {
-  //   ToDoSplash, ToDoHomeScreen
-  // }
+  name: 'ToDoListView',
   data() {
     return {
-      isStart: false,
+      isSplash: true,
       isHomeScreen: false,
-      isAddTaskScreen: true,
-      isEditTaskScreen: false
+      isAddTaskScreen: false,
+      isEditTaskScreen: false,
+      isToDoDeleteAlert: false,
+      toUpdateTask: {}
+    }
+  },
+  methods: {
+    viewToDoHomeScreen() {
+      this.isAddTaskScreen = false
+      this.isEditTaskScreen = false
+      this.isSplash = false
+      this.isHomeScreen = true
+    },
+    viewToDoAddTaskScreen() {
+      this.isHomeScreen = false
+      this.isAddTaskScreen= true
+    },
+    viewToDoEditTaskScreen(item) {
+      this.isHomeScreen = false
+      this.isEditTaskScreen = true
+      this.toUpdateTask = item
+      console.log(item.title);
     }
   },
 

@@ -4,7 +4,9 @@
       <ToDoIconLogo />
       <h1>Make successful your day</h1>
       <h2 class="accent-200">Make small somethings to get big gift in your life</h2>
-      <ToDoButton class="bg-accent-400 button-splash">Start</ToDoButton>
+      <ToDoButton class="bg-accent-400 button-splash"
+      @clickButton="startToDo"
+      >Start</ToDoButton>
     </div>
   </div>
 </template>
@@ -12,12 +14,16 @@
 <script>
 export default {
   name: 'ToDoSplash',
+  methods: {
+    startToDo() {
+      this.$emit('startToDo')
+    }
+  }
+
 }
 </script>
 
 <style lang="scss" scoped>
-@import url(https://fonts.googleapis.com/css?family=Montserrat:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic);
-@import url(https://fonts.googleapis.com/css?family=Creepster:regular);
 @import "@/assets/variables.scss";
 @import "@/assets/utility.scss";
 h1 {

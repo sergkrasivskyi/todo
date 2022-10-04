@@ -1,17 +1,24 @@
 <template>
   <div class="wrapper-controls">
     <span>
-      <slot name="todos">8 Todos{{}}</slot>
+      {{tasksAmount}} Todos
     </span>
     <span class="accent-400">
-      <slot name="All">View all</slot>
+      View all
     </span>
   </div>
 </template>
 
 <script>
+import { toDosList } from '@/main'
 export default {
-  name: 'ToDoControlsHome'
+  name: 'ToDoControlsHome',
+  computed: {
+    tasksAmount() {
+      return toDosList.taskList.length
+    }
+  }
+  
 }
 </script>
 

@@ -1,37 +1,45 @@
-import { createPinia, defineStore } from 'pinia'
+import { createPinia, defineStore } from "pinia";
 // import { createPinia } from 'pinia'
-// export const store = createPinia();
-export const useToDoList = defineStore('ToDoList', {
-state: () => {
-  return {
-    newToDoItem: '',
-    fetching: false
-  }
-},
-getters: {
-  results(state) {
-    return state.newToDoItem
+export const pinia = createPinia();
+export const useToDoList = defineStore("ToDoListStore", {
+  state: () => {
+    return {
+      toEditTask: {},
+      fetching: false,
+      taskList: [],
+    };
   },
-  isFetching(state) {
-    return state.fetching
-  }
-}, 
-actions: {
-  async fetchNewToDoItem() {
-    this.fetching = true;
-    const response = await fetch('data/newtodoitems.json')
-    try {
-      const result = await response.json()
-      this.newToDoItem = result.items
-
-    } catch (err) {
-      this.newToDoItem = '';
-        console.error('Error loading new todoItems:', err);
+  getters: {
+    results(state) {
+      return state.newToDoItem;
+    },
+    isFetching(state) {
+      return state.fetching;
+    },
+  },
+  actions: {
+    async fetchNewToDoItem() {
+      this.fetching = true;
+      const response = await fetch("data/newtodoitems.json");
+      try {
+        const result = await response.json();
+        this.newToDoItem = result.items;
+      } catch (err) {
+        this.newToDoItem = "";
+        console.error("Error loading new todoItems:", err);
         return err;
+      }
+      this.fetching = false;
+    },
+    addTodoItem(currenTask) {
+      this.taskList.push({id: Date.now(), ...currenTask});
+    },
+    editToDoItem(taskToEdit) {
+      console.log(taskToEdit);
+      // забрати дані з форми Edit так змінити потрібний Task
     }
-    this.fetching = false
-  }
-}
-})
+  },
+});
+
 
 
