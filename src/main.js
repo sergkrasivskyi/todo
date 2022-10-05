@@ -2,9 +2,8 @@ import '@/assets/main.scss'
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
-import { createPinia } from "pinia";
-import componentsUI from "@/components/UI";
 import components from "@/components";
+import componentsUI from "@/components/UI";
 import componentsViews from "@/views";
 import componentsIcons from "@/components/icons/";
 

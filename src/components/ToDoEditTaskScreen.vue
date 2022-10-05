@@ -34,8 +34,10 @@
       <div class="buttons">
         <ToDoButton class="bg-accent-400 task-button"
           @clickButton="updateTask" 
-          >Done!</ToDoButton>
-        <ToDoButton class="bg-accent-600 task-button">Delete</ToDoButton>
+          >{{updateAlert}}</ToDoButton>
+        <ToDoButton class="bg-accent-600 task-button"
+          @clickButton="deleteTask"
+        >Delete</ToDoButton>
       </div>
     </div>
   </div>
@@ -47,6 +49,7 @@ export default {
   name: 'ToDoEditTaskScreen',
   data() {
     return {
+      updateAlert: 'Done!'
     }
   },
   props: {
@@ -64,14 +67,28 @@ export default {
     },
     updateTask() {
       // передати дані в store для мутації даних
-      let id = toDosList.toEditTask.id
-      let index = toDosList.taskList.findIndex(task => task.id === id)
-      toDosList.taskList[index] = { ...toDosList.toEditTask }
+      // редагуємо елемент
+      // let id = toDosList.toEditTask.id
+      // let index = toDosList.taskList.findIndex(task => task.id === id)
+      // toDosList.taskList[index] = { ...toDosList.toEditTask }
+      
+      toDosList.editToDoItem()
+      this.updateAlert = "Updated!"
+      setTimeout(this.$emit, 1000, 'editDone');
+    },
+    deleteTask() {
+
+      // let id = toDosList.toEditTask.id;
+      // let index = toDosList.taskList.findIndex((task) => task.id === id);
       // toDosList.toEditTask = {}
-      // Object.assign({}, toDosList.toEditTask) 
-      // = {...toDosList.toEditTask}
-      console.log(index);
-      // console.log(this.newTitle);
+      // // видаляємо елемент
+      // index && id
+      //   ? toDosList.taskList.splice(index, 1)
+      //   : console.log("Empty cell");
+
+      toDosList.deleteTask()
+      this.$emit('taskDeleted')
+      
     }
   },
   computed: {

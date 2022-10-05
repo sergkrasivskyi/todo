@@ -11,6 +11,7 @@
         class="wide" 
         type="text"
         placeholder="Enter task title"
+        
         @update:modelValue="addTitle">
         <template v-slot:label-text>
           Title
@@ -37,7 +38,7 @@
       <div class="buttons">
         <ToDoButton class="bg-accent-400 task-button" 
           @clickButton="addTaskToList"
-          >Add
+          >{{addAlert}}
         </ToDoButton>
         <ToDoButton class="bg-accent-600 task-button" 
           @clickButton="cancelAddPage"
@@ -55,6 +56,7 @@ export default {
   name: 'ToDoAddTaskScreen',
   data() {
     return {
+      addAlert:'Add',
       currenTask: { title: '', description: '', date: '' }
     }
   },
@@ -75,12 +77,20 @@ export default {
 
     addTaskToList() {
       toDosList.addTodoItem(this.currenTask)
+      this.addAlert = 'Added!'
+      setTimeout(this.$emit, 1000, 'addTaskDone');
+      // this.$emit('addTaskDone')
 
     },
     cancelAddPage() {
       this.$emit('cancelAddPage')
     }
   },
+  computed: {
+    // addAlert() {
+    //   return
+    // }
+  }
 
 }
 </script>
