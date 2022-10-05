@@ -1,6 +1,7 @@
 <template>
   <div class="wrapper-add-task">
-    <ToDoHeaderAppBar>
+    <ToDoHeaderAppBar
+      @pageClose="cancelAddPage">
       <template v-slot:header-app-text>
         Add task
       </template>
@@ -79,8 +80,8 @@ export default {
     },
     cancelAddPage() {
       this.$emit('cancelAddPage')
-    }
-  },
+    },
+    },
   computed: {
 
   }

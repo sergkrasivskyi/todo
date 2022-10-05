@@ -19,6 +19,7 @@
       :toUpdateTask="toUpdateTask"
       @editDone="viewToDoHomeScreen"
       @taskDeleted="viewToDoDeleteAlert"
+      @cancelEditPage="viewToDoHomeScreen"
     />
     <!-- Delete Alert Screen -->
     <ToDoDeleteAlert v-else-if="isToDoDeleteAlert"/>

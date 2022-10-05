@@ -1,6 +1,8 @@
 <template>
   <div class="wrapper-add-task">
-    <ToDoHeaderAppBar>
+    <ToDoHeaderAppBar
+      @pageClose="cancelEditPage"
+      >
       <template v-slot:header-app-text>
         Edit task
       </template>
@@ -89,6 +91,9 @@ export default {
       toDosList.deleteTask()
       this.$emit('taskDeleted')
       
+    },
+    cancelEditPage() {
+      this.$emit('cancelEditPage')
     }
   },
   computed: {

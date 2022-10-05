@@ -1,13 +1,21 @@
 <template>
   <div class="wrapper-header-app-bar">
     <h2 class="header-app-title accent-400"><slot name="header-app-text"/></h2>
-    <img src="@/assets/page-close.svg" alt="close page">
+    <div class="header-app-bar-img"
+      @click="pageCloseClick">
+      <img src="@/assets/page-close.svg" alt="close page">
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'ToDoHeaderAppBar'
+  name: 'ToDoHeaderAppBar',
+  methods: {
+    pageCloseClick() {
+      this.$emit('pageClose')
+    }
+  }
 }
 </script>
 
