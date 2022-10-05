@@ -64,32 +64,25 @@ export default {
   methods: {
     addTitle(event) {
       this.currenTask.title = event.target.value
-      // console.log(event.target.value);
     },
     addDescription(event) {
       this.currenTask.description = event.target.value
-      // console.log(event.target.value);
     },
     addDate(event) {
       this.currenTask.date = event.target.value
-      // console.log(event.target.value);
     },
 
     addTaskToList() {
       toDosList.addTodoItem(this.currenTask)
       this.addAlert = 'Added!'
       setTimeout(this.$emit, 1000, 'addTaskDone');
-      // this.$emit('addTaskDone')
-
     },
     cancelAddPage() {
       this.$emit('cancelAddPage')
     }
   },
   computed: {
-    // addAlert() {
-    //   return
-    // }
+
   }
 
 }

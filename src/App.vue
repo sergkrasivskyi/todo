@@ -1,9 +1,5 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import { storeToRefs } from 'pinia'
-import ToDoListView from '@/views/ToDoListView.vue'
-import { pinia, useToDoList } from "@/store/ToDoListStore";
-
 </script>
 
 <template>
