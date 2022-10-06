@@ -8,39 +8,15 @@
     </ToDoHeaderAppBar>
     <div class="container flow">
       <ToDoIconLogo space-type="200"></ToDoIconLogo>
-      <ToDoFormInput 
-        class="wide" 
-        type="text"
-        placeholder="Enter task title"
-        
-        @update:modelValue="addTitle">
-        <template v-slot:label-text>
-          Title
-        </template>
-      </ToDoFormInput>
-      <ToDoFormInput 
-        class="wide"
-        type="text"
-        placeholder="Enter task description" 
-        @update:modelValue="addDescription">
-        <template v-slot:label-text>
-          Description
-        </template>
-      </ToDoFormInput>
-      <ToDoFormInput 
-        class="wide"
-        type="date" 
-        placeholder="Enter Date end"
-        @update:modelValue="addDate">
-        <template v-slot:label-text>
-          Date end
-        </template>
-      </ToDoFormInput>
+
+      <ToDoTask></ToDoTask>
+      
       <div class="buttons">
         <ToDoButton class="bg-accent-400 task-button" 
           @clickButton="addTaskToList"
-          >{{addAlert}}
+          >{{ addAlert }}
         </ToDoButton>
+        
         <ToDoButton class="bg-accent-600 task-button" 
           @clickButton="cancelAddPage"
           >Cancel
@@ -58,7 +34,7 @@ export default {
   data() {
     return {
       addAlert:'Add',
-      currenTask: { title: '', description: '', date: '' }
+      currenTask: { title: 'Hello', description: 'asda', date: '2022-10-06' }
     }
   },
 
@@ -74,14 +50,16 @@ export default {
     },
 
     addTaskToList() {
-      toDosList.addTodoItem(this.currenTask)
+      // toDosList.addTodoItem(this.currenTask)
+      toDosList.addTodoItem()
       this.addAlert = 'Added!'
       setTimeout(this.$emit, 1000, 'addTaskDone');
     },
     cancelAddPage() {
       this.$emit('cancelAddPage')
     },
-    },
+  
+  },
   computed: {
 
   }

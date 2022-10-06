@@ -24,6 +24,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "@/assets/variables.scss";
+@import "@/assets/utility.scss";
 .wrapper-item-header {
   display: flex;
   flex-wrap: nowrap;
@@ -35,6 +37,10 @@ export default {
   border-radius: 4px;
   width: 100%;
   column-gap:0.5rem;
+  cursor: pointer;
+  &:hover{
+    background-color: $accent-color-400;
+  }
   & .checkbox {
     flex-basis: 5%;
   }

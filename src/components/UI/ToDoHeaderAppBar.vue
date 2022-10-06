@@ -35,5 +35,8 @@ export default {
     font-size: 1rem;
     line-height: 1.25;
   }
+  & .header-app-bar-img {
+    cursor: pointer;
+  }
 }
 </style>

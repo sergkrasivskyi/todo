@@ -5,7 +5,7 @@
       <h1>Make successful your day</h1>
       <h2 class="accent-200">Make small somethings to get big gift in your life</h2>
       <ToDoButton class="bg-accent-400 button-splash"
-      @clickButton="startToDo"
+        @clickButton="startToDo"
       >Start</ToDoButton>
     </div>
   </div>

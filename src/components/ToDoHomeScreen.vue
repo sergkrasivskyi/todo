@@ -3,7 +3,7 @@
     <ToDoAppBar class="flex-head" space-type="0"></ToDoAppBar>
     <div class="container flex-main">
       <ToDoControlsHome space-type="250" />
-      <ToDoItemHeader space-type="50" />
+      <ToDoItemHeader space-type="50"/>
       <!-- loop have been here -->
       <ToDoItem space-type="50"
         v-for="item in tasksList"
@@ -36,7 +36,7 @@ export default {
     },
     toEditTaskScreen(item) {
       this.$emit('editTask', item)
-      toDosList.toEditTask = {...item}
+      toDosList.currenTask = {...item}
     }
 
   },

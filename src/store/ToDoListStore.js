@@ -3,7 +3,8 @@ export const pinia = createPinia();
 export const useToDoList = defineStore("ToDoListStore", {
   state: () => {
     return {
-      toEditTask: {},
+      emptyTask: { title: "", description: "", date: "" },
+      currenTask: { title: "", description: "", date: "" },
       fetching: false,
       taskList: [],
     };
@@ -30,25 +31,28 @@ export const useToDoList = defineStore("ToDoListStore", {
       }
       this.fetching = false;
     },
-    addTodoItem(currenTask) {
+    addTodoItem() {
       // додаємо Task у список і визначаємо id цього Task
-      this.taskList.push({ id: Date.now(), ...currenTask });
+
+      this.taskList.push({ id: Date.now(), ...this.currenTask });
+      this.currenTask = { ...this.emptyTask };
       // тут можливо, краще було б окремо визначати ключ id,
       // так простіше було б мати доступ, по типу цього
         // this.taskList.id = Date.now() = {...currenTask};
     },
     editToDoItem() {
-      let id = this.toEditTask.id;
+      // let id = this.toEditTask.id;
+      let id = this.currenTask.id;
       // по id знаходимо index Task-а
       let index = this.taskList.findIndex((task) => task.id === id);
       // змінюємо значення усіх властивостей на відредаговані
       
-      this.taskList[index] = { ...this.toEditTask };
+      this.taskList[index] = { ...this.currenTask };
     },
     deleteTask() {
-      let id = this.toEditTask.id;
+      let id = this.currenTask.id;
       let index = this.taskList.findIndex((task) => task.id === id);
-      this.toEditTask = {}
+      this.currenTask = { ...this.emptyTask };
         // видаляємо елемент
         id || index
         ? this.taskList.splice(index, 1)

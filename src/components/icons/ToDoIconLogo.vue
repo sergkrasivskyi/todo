@@ -1,6 +1,6 @@
 <template>
   <div class="icon-position">
-    <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width="100" height="100" viewBox="0 0 100 100" :fill="color">
       <g clip-path="url(#clip0_2_136)">
         <g clip-path="url(#clip1_2_136)">
           <rect x="-1.39478" y="63.3481" width="75" height="75" rx="10" transform="rotate(-60 -1.39478 63.3481)"
@@ -37,12 +37,18 @@
 </template>
 <script>
 export default {
-  name: 'ToDoIconLogo'
+  name: 'ToDoIconLogo',
+  props: {
+    color: {
+      type: String,
+      default: 'none'
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>
 .icon-position {
-text-align: center;
+  text-align: center;
 }
 </style>
 

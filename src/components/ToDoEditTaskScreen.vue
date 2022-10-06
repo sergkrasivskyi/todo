@@ -9,34 +9,15 @@
     </ToDoHeaderAppBar>
     <div class="container flow">
       <ToDoIconLogo class="center" space-type="200"></ToDoIconLogo>
-      <ToDoFormInput :modelValue="taskTitle"
-        @update:modelValue="editTitle"
-        class="wide" 
-        type="text">
-        <template v-slot:label-text>
-          Title
-        </template>
-      </ToDoFormInput>
-      <ToDoFormInput :modelValue="taskDescription"
-        @update:modelValue="editDescription"
-        class="wide" 
-        type="text">
-        <template v-slot:label-text>
-          Description
-        </template>
-      </ToDoFormInput>
-      <ToDoFormInput :modelValue="taskDate"
-        @update:modelValue="editDate"
-        class="wide" 
-        type="date">
-        <template v-slot:label-text>
-          Date end
-        </template>
-      </ToDoFormInput>
+      <ToDoTask
+        v-model:title="taskTitle"
+        v-model:description="taskDescription"
+        v-model:date="taskDate"
+      ></ToDoTask>
       <div class="buttons">
         <ToDoButton class="bg-accent-400 task-button"
           @clickButton="updateTask" 
-          >{{updateAlert}}</ToDoButton>
+          >{{ updateAlert }}</ToDoButton>
         <ToDoButton class="bg-accent-600 task-button"
           @clickButton="deleteTask"
         >Delete</ToDoButton>
@@ -58,15 +39,15 @@ export default {
     toUpdateTask: {type: Object, default: null}
   },
   methods: {
-    editTitle(event) {
-      toDosList.toEditTask.title = event.target.value
-    },
-    editDescription(event) { 
-      toDosList.toEditTask.description = event.target.value
-    },
-    editDate(event) {
-      toDosList.toEditTask.date = event.target.value
-    },
+    // editTitle(event) {
+    //   toDosList.toEditTask.title = event.target.value
+    // },
+    // editDescription(event) { 
+    //   toDosList.toEditTask.description = event.target.value
+    // },
+    // editDate(event) {
+    //   toDosList.toEditTask.date = event.target.value
+    // },
     updateTask() {
       // передати дані в store для мутації даних
       // редагуємо елемент
@@ -98,18 +79,15 @@ export default {
   },
   computed: {
     taskTitle() {
-      // return toDosList.toEditTask.title
-      return this.toUpdateTask.title
+      return toDosList.currenTask.title
     },
     taskDescription() {
-      return toDosList.toEditTask.description
+      return toDosList.currenTask.description
     },
     taskDate() {
-      return toDosList.toEditTask.date
+      return toDosList.currenTask.date
     },
-    // newTitle() {
-    //   console.log(this.newTitle);
-    // }
+   
   }
 
 }
