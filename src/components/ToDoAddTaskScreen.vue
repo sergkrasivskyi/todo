@@ -22,12 +22,14 @@
           >Cancel
         </ToDoButton>
       </div>
-    </div>
+  </div>
   </div>
 </template>
 
 <script>
-import { toDosList } from '@/main'
+// import { mapStores } from 'pinia'
+// import { toDosList } from '@/main'
+// import stores  from '@/stores'
 
 export default {
   name: 'ToDoAddTaskScreen',
@@ -51,13 +53,21 @@ export default {
 
     addTaskToList() {
       // toDosList.addTodoItem(this.currenTask)
-      toDosList.addTodoItem()
+      toDosListStore.addTodoItem()
+      console.log(toDosList.viewList)
+
       this.addAlert = 'Added!'
       setTimeout(this.$emit, 1000, 'addTaskDone');
     },
     cancelAddPage() {
+      // toDosList.currenTask = { ...toDosList.emptyTask }
+      toDosList.initializeTask()
       this.$emit('cancelAddPage')
     },
+    // computed: {
+    //   // other computed properties
+    //   ...mapStores(useToDoList, useToDoUsers),
+    // },
   
   },
   computed: {

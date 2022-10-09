@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { toDosList } from '@/main'
+// import  stores  from '@/stores'
 export default {
   name: 'ToDoItem',
   props: {

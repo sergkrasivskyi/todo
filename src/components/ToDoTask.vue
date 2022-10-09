@@ -19,7 +19,7 @@
         <template v-slot:label-text>
           Description
         </template>
-      </ToDoFormInput>
+    </ToDoFormInput>
       <ToDoFormInput 
         class="wide" 
         type="date" 
@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import { toDosList } from '@/main'
+// import  stores  from '@/stores'
   export default {
     name: 'ToDoTask',
     props: {

@@ -29,6 +29,11 @@
 </template>
 
 <script>
+// import { mapStores } from 'pinia'
+
+// import { useToDoList } from "@/stores/ToDoListStore";
+// import { useToDoUsers } from "@/stores/ToDoUserStore";
+
 export default {
   name: 'ToDoListView',
   data() {
@@ -48,6 +53,7 @@ export default {
       this.isEditTaskScreen = false
       this.isSplash = false
       this.isHomeScreen = true
+
     },
     viewToDoAddTaskScreen() {
       this.isHomeScreen = false
@@ -68,6 +74,13 @@ export default {
       router.push('/todolist/homescreen')
     }
   },
+  // computed: {
+  //   // other computed properties
+  //   ...mapStores(useToDoList, useToDoUsers),
+  // },
+  // mounted() {
+  //   ...mapStores(useToDoList, useToDoUsers)
+  // }
 
 }
 </script>

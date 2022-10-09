@@ -1,11 +1,13 @@
-import { createPinia, defineStore } from "pinia";
-export const pinia = createPinia();
-export const useToDoList = defineStore("ToDoListStore", {
+// import { createPinia, defineStore } from "pinia";
+import { defineStore } from "pinia";
+// export const pinia = createPinia();
+export const useToDoList = defineStore("toDosList", {
   state: () => {
     return {
       emptyTask: { title: "", description: "", date: "" },
       currenTask: { title: "", description: "", date: "" },
       fetching: false,
+      startLIst: [],
       taskList: [],
     };
   },
@@ -36,9 +38,10 @@ export const useToDoList = defineStore("ToDoListStore", {
 
       this.taskList.push({ id: Date.now(), ...this.currenTask });
       this.currenTask = { ...this.emptyTask };
+
       // тут можливо, краще було б окремо визначати ключ id,
       // так простіше було б мати доступ, по типу цього
-        // this.taskList.id = Date.now() = {...currenTask};
+      // this.taskList.id = Date.now() = {...currenTask};
     },
     editToDoItem() {
       // let id = this.toEditTask.id;
@@ -46,19 +49,31 @@ export const useToDoList = defineStore("ToDoListStore", {
       // по id знаходимо index Task-а
       let index = this.taskList.findIndex((task) => task.id === id);
       // змінюємо значення усіх властивостей на відредаговані
-      
+
       this.taskList[index] = { ...this.currenTask };
     },
     deleteTask() {
       let id = this.currenTask.id;
       let index = this.taskList.findIndex((task) => task.id === id);
+      // this.currenTask = { ...this.emptyTask };
+      this.initializeTask();
+      // видаляємо елемент
+      id || index ? this.taskList.splice(index, 1) : console.log("Empty cell");
+    },
+    initializeTask() {
       this.currenTask = { ...this.emptyTask };
-        // видаляємо елемент
-        id || index
-        ? this.taskList.splice(index, 1)
-        : console.log("Empty cell");
-  }
+    },
   },
+
+  getters: {
+    viewList(state) {
+      const viewedList = [...state.taskList];
+      return viewedList.splice(0, 10);
+    },
+  },
+  // getters: {
+  //   doneTodos: (state) => state.todos.filter((todo) => todo.done),
+  // },
 });
 
 

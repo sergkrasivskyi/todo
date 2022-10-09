@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { toDosList } from '@/main'
+// import stores  from '@/stores'
 export default {
   name: 'ToDoHomeScreen',
   data() {
@@ -40,11 +40,12 @@ export default {
     }
 
   },
-  computed: {
-    tasksList() {
-      return toDosList.taskList;
-    }
-  },
+  // computed: {
+  //   // tasksList() {
+  //   //   return toDosListStore.taskList;
+  //     // console.log(stores);
+  //   }
+  // },
 }
 </script>
 

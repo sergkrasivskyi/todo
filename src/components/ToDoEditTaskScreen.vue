@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import { toDosList } from '@/main'
+// import stores  from '@/stores'
 export default {
   name: 'ToDoEditTaskScreen',
   data() {
@@ -74,6 +74,8 @@ export default {
       
     },
     cancelEditPage() {
+      // toDosList.currenTask = { ...toDosList.emptyTask }
+      toDosList.initializeTask()
       this.$emit('cancelEditPage')
     }
   },

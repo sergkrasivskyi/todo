@@ -1,6 +1,3 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-</script>
 
 <template>
   <header>
@@ -13,6 +10,25 @@ import { RouterLink, RouterView } from 'vue-router'
 
   <RouterView />
 </template>
+
+<script >
+  import { RouterLink, RouterView } from 'vue-router'
+  import { mapStores } from 'pinia'
+  
+  import { useToDoList } from "@/stores/ToDoListStore";
+  import { useToDoUsers } from "@/stores/ToDoUserStore";
+  
+  export default {
+    // mounted() {
+    //   ...mapStores(useToDoList, useToDoUsers)
+    // }
+      
+    computed: {
+    // other computed properties
+    ...mapStores(useToDoList, useToDoUsers),
+  },
+  }
+  </script>
 
 <style lang="scss">
 @import "@/assets/variables.scss";
