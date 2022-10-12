@@ -5,7 +5,7 @@
       <h1>Make successful your day</h1>
       <h2 class="accent-200">Make small somethings to get big gift in your life</h2>
       <ToDoButton class="bg-accent-400 button-splash"
-        @clickButton="startToDo"
+        @clickButton="goToHomeScreen"
       >Start</ToDoButton>
     </div>
   </div>
@@ -13,10 +13,14 @@
 
 <script>
 export default {
-  name: 'ToDoSplash',
+  name: 'SplashScreen',
   methods: {
     startToDo() {
       this.$emit('startToDo')
+    },
+    goToHomeScreen() {
+      // console.log(this.$router);
+      this.$router.push('/homescreen')
     }
   }
 

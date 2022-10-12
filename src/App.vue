@@ -1,34 +1,34 @@
 
 <template>
-  <header>
-    <div class="wrapper">
-      <nav>
-        <RouterLink :to="{ name: 'todolist' }">ToDoList</RouterLink>
-      </nav>
-    </div>
-  </header>
-
-  <RouterView />
+  <SplashScreen v-if="$route.path === '/'"/>
+  <RouterView v-else :key="$route.path"/>
 </template>
 
 <script >
-  import { RouterLink, RouterView } from 'vue-router'
-  import { mapStores } from 'pinia'
-  
-  import { useToDoList } from "@/stores/ToDoListStore";
-  import { useToDoUsers } from "@/stores/ToDoUserStore";
-  
-  export default {
-    // mounted() {
-    //   ...mapStores(useToDoList, useToDoUsers)
-    // }
-      
-    computed: {
-    // other computed properties
-    ...mapStores(useToDoList, useToDoUsers),
+// import { RouterLink, RouterView } from 'vue-router'
+import { mapStores } from 'pinia'
+
+import { useToDoList } from "@/stores/ToDoListStore";
+import { useToDoUsers } from "@/stores/ToDoUserStore";
+
+export default {
+  data() {
+    return {
+    }
   },
-  }
-  </script>
+  // mounted() {
+  //   ...mapStores(useToDoList, useToDoUsers)
+  // },
+    
+// computed: {
+//   // other computed properties
+//   ...mapStores(useToDoList, useToDoUsers),
+// },
+methods: {
+
+},
+}
+</script>
 
 <style lang="scss">
 @import "@/assets/variables.scss";
@@ -69,11 +69,11 @@ nav a:first-of-type {
   border: 0;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1920px) {
   header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+    // display: flex;
+    // place-items: center;
+    // padding-right: calc(var(--section-gap) / 2);
   }
 
   .logo {

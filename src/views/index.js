@@ -1,2 +1,2 @@
-import ToDoListView from "@/views/ToDoListView.vue"
-export default [ToDoListView];
+import SplashScreen from "@/views/SplashScreen.vue";
+export default [SplashScreen];

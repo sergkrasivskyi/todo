@@ -4,10 +4,10 @@
 @import "@/assets/utility.scss";
 
 #app {
-  max-width: 1280px;
+  max-width: 640px;
   margin: 0 auto;
   padding: 2rem;
-
+  border: 2px solid teal;
   font-weight: normal;
 }
 
@@ -26,13 +26,13 @@ a,
 
 @media (min-width: 1024px) {
   body {
-    display: flex;
-    place-items: center;
+    // display: flex;
+    // place-items: center;
   }
 
   #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
+    // display: grid;
+    // grid-template-columns: 1fr 1fr;
+    // padding: 0 2rem;
   }
 }

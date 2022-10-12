@@ -1,4 +1,5 @@
 <template>
+  <div class="mini-logo">
   <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
     <g clip-path="url(#clip0_2_108)">
       <rect x="16" y="59" width="50" height="50" rx="10" transform="rotate(-60 16 59)" fill="#1AB8DB"
@@ -27,9 +28,16 @@
       </clipPath>
     </defs>
   </svg>
+  </div>
 </template>
 <script>
 export default {
   name: 'ToDoMiniLogo'
 }
 </script>
+<style lang="scss" scoped>
+.mini-logo {
+  display: inline-block;
+  // background-color: tomato;
+}
+</style>

@@ -20,74 +20,55 @@
           >{{ updateAlert }}</ToDoButton>
         <ToDoButton class="bg-accent-600 task-button"
           @clickButton="deleteTask"
-        >Delete</ToDoButton>
+        >{{deleteAlert}}</ToDoButton>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-// import stores  from '@/stores'
+import { toDosListStore, toDoUserStore } from '@/main'
 export default {
   name: 'ToDoEditTaskScreen',
   data() {
     return {
-      updateAlert: 'Done!'
+      updateAlert: 'Done!',
+      deleteAlert: 'Delete'
     }
   },
   props: {
     toUpdateTask: {type: Object, default: null}
   },
   methods: {
-    // editTitle(event) {
-    //   toDosList.toEditTask.title = event.target.value
-    // },
-    // editDescription(event) { 
-    //   toDosList.toEditTask.description = event.target.value
-    // },
-    // editDate(event) {
-    //   toDosList.toEditTask.date = event.target.value
-    // },
     updateTask() {
-      // передати дані в store для мутації даних
-      // редагуємо елемент
-      // let id = toDosList.toEditTask.id
-      // let index = toDosList.taskList.findIndex(task => task.id === id)
-      // toDosList.taskList[index] = { ...toDosList.toEditTask }
-      
-      toDosList.editToDoItem()
+      toDosListStore.editToDoItem()
       this.updateAlert = "Updated!"
-      setTimeout(this.$emit, 1000, 'editDone');
+      setTimeout(this.$router.push, 1000, '/homescreen');
     },
     deleteTask() {
-
-      // let id = toDosList.toEditTask.id;
-      // let index = toDosList.taskList.findIndex((task) => task.id === id);
-      // toDosList.toEditTask = {}
-      // // видаляємо елемент
-      // index && id
-      //   ? toDosList.taskList.splice(index, 1)
-      //   : console.log("Empty cell");
-
-      toDosList.deleteTask()
-      this.$emit('taskDeleted')
+      this.deleteAlert = 'Deleted!'
+      toDosListStore.deleteTask()
+      setTimeout(this.$router.push, 400, '/homescreen');
+      
+      // this.$emit('taskDeleted')
       
     },
     cancelEditPage() {
       // toDosList.currenTask = { ...toDosList.emptyTask }
-      toDosList.initializeTask()
-      this.$emit('cancelEditPage')
+      toDosListStore.initializeTask()
+      setTimeout(this.$router.push, 100, '/homescreen');
+      // this.$emit('cancelEditPage')
     }
   },
   computed: {
     taskTitle() {
-      return toDosList.currenTask.title
+      return toDosListStore.currenTask.title
     },
     taskDescription() {
-      return toDosList.currenTask.description
+      return toDosListStore.currenTask.description
     },
     taskDate() {
-      return toDosList.currenTask.date
+      return toDosListStore.currenTask.date
     },
    
   }

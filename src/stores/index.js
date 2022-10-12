@@ -1,16 +1,16 @@
-import { createPinia, mapStores, mapState} from 'pinia'
+// import { createPinia, mapStores, mapState} from 'pinia'
 
-import { useToDoList } from "@/stores/ToDoListStore";
-import { useToDoUsers } from "@/stores/ToDoUserStore";
+// import { useToDoList } from "@/stores/ToDoListStore";
+// import { useToDoUsers } from "@/stores/ToDoUserStore";
 
 
-export default {
-  // name: 'stores',
-  computed: {
-    // other computed properties
-    ...mapStores(useToDoList, useToDoUsers),
-  },
-};  
+// export default {
+//   // name: 'stores',
+//   computed: {
+//     // other computed properties
+//     ...mapStores(useToDoList, useToDoUsers),
+//   },
+// };  
 //   created() {
 //     this.toDosListStore; // store with id "user"
 //     this.toDoUserStore; // store with id "cart"

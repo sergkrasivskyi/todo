@@ -36,6 +36,12 @@
 
 <script>
 // import  stores  from '@/stores'
+import { mapStores, mapState } from 'pinia'
+import { useToDoList } from '@/stores/ToDoListStore'
+import { useToDoUsers } from '@/stores/ToDoUserStore'
+
+import { toDosListStore, toDoUserStore } from '@/main'
+
   export default {
     name: 'ToDoTask',
     props: {
@@ -54,15 +60,18 @@
   },
   methods: {
       addTitle(event) {
-        toDosList.currenTask.title = event.target.value
+        toDosListStore.currenTask.title = event.target.value
       },
       addDescription(event) {
-        toDosList.currenTask.description = event.target.value
+        toDosListStore.currenTask.description = event.target.value
       },
       addDate(event) {
-        toDosList.currenTask.date = event.target.value
+        toDosListStore.currenTask.date = event.target.value
       },
-    }
+    },
+  // computed: {
+  //     ...mapStores(useToDoList, useToDoUsers),
+  // }
   }
 </script>
 

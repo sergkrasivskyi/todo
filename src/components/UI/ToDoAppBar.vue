@@ -1,12 +1,20 @@
 <template>
   <div class="wrapper-bar">
-    <ToDoMiniLogo class="center-in-bar"></ToDoMiniLogo>
+    <ToDoMiniLogo class="center-in-bar"
+      @click="clickLogo"
+    ></ToDoMiniLogo>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'ToDoAppBar'
+  name: 'ToDoAppBar',
+  methods: {
+    clickLogo() {
+      this.$emit("clickLogo")
+      console.log("clickLogo");
+    }
+  }
 }
 </script>
 

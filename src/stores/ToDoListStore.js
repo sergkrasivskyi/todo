@@ -1,6 +1,5 @@
 // import { createPinia, defineStore } from "pinia";
 import { defineStore } from "pinia";
-// export const pinia = createPinia();
 export const useToDoList = defineStore("toDosList", {
   state: () => {
     return {

@@ -10,16 +10,14 @@
 </template>
 
 <script>
-// import stores  from '@/stores'
-// import { toDosListStore }  from '@/stores'
+import { toDosListStore } from '@/main'
+
 export default {
   name: 'ToDoControlsHome',
   computed: {
     tasksAmount() {
-      // return toDosList.taskList.length
-      // console.log(stores);
-      // console.log(toDoListStore);
-      // return toDoListStore.taskList.length
+      return toDosListStore.taskList.length
+    
     }
   }
   

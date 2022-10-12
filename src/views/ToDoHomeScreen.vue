@@ -1,6 +1,8 @@
 <template>
   <div class="wrapper flow">
-    <ToDoAppBar class="flex-head" space-type="0"></ToDoAppBar>
+    <ToDoAppBar class="flex-head" space-type="0"
+    @clickLogo="goToSplashscreen()"
+    ></ToDoAppBar>
     <div class="container flex-main">
       <ToDoControlsHome space-type="250" />
       <ToDoItemHeader space-type="50"/>
@@ -23,7 +25,11 @@
 </template>
 
 <script>
-// import stores  from '@/stores'
+import {toDosListStore} from '@/main'
+// import { mapStores, mapState } from 'pinia'
+
+
+
 export default {
   name: 'ToDoHomeScreen',
   data() {
@@ -31,21 +37,34 @@ export default {
     }
   },
   methods: {
+    goToSplashscreen() {
+      this.$router.push('/')
+    },
     addTask() {
-      this.$emit('addTask')
+      this.$router.push('/addscreen') 
+      // this.$emit('addTask')
     },
     toEditTaskScreen(item) {
-      this.$emit('editTask', item)
-      toDosList.currenTask = {...item}
-    }
+      // this.$emit('editTask', item)
+      this.$router.push('/editscreen')
+      toDosListStore.currenTask = {...item}
+    },
+    // tasksList() {
+    //   return toDosListStore.taskList;
+      // console.log(stores);
+    // }
 
   },
-  // computed: {
-  //   // tasksList() {
-  //   //   return toDosListStore.taskList;
-  //     // console.log(stores);
-  //   }
-  // },
+  computed: {
+      // other computed properties
+    // ...mapState(useToDoList, ['toDosList']),  
+    // ...mapStores(useToDoList, useToDoUsers),
+    // console.log(stores);
+    tasksList() {
+      return toDosListStore.taskList;
+      // console.log(stores);
+    }
+  },
 }
 </script>
 
@@ -57,6 +76,8 @@ export default {
   background-color: $primary-color-200;
   height: 100vh;
   text-align: center;
+  width: 100%;
+  min-width: 375px;
 
   & .flex-head {
     flex: 0 0 auto;
