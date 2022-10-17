@@ -1,29 +1,17 @@
-
 <template>
-  <SplashScreen v-if="$route.path === '/'"/>
-  <RouterView v-else :key="$route.path"/>
+  <router-view/>
 </template>
 
 <script >
 // import { RouterLink, RouterView } from 'vue-router'
-import { mapStores } from 'pinia'
-
-import { useToDoList } from "@/stores/ToDoListStore";
-import { useToDoUsers } from "@/stores/ToDoUserStore";
 
 export default {
   data() {
     return {
+      
     }
   },
-  // mounted() {
-  //   ...mapStores(useToDoList, useToDoUsers)
-  // },
-    
-// computed: {
-//   // other computed properties
-//   ...mapStores(useToDoList, useToDoUsers),
-// },
+
 methods: {
 
 },

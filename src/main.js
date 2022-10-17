@@ -1,5 +1,6 @@
 import '@/assets/main.scss'
 import { createApp } from 'vue'
+import { createPinia } from "pinia";
 import App from './App.vue'
 import router from './router'
 import components from "@/components";
@@ -7,9 +8,6 @@ import componentsUI from "@/components/UI";
 import componentsViews from "@/views";
 import componentsIcons from "@/components/icons/";
 
-import { useToDoList } from "@/stores/ToDoListStore";
-import { useToDoUsers } from "@/stores/ToDoUserStore";
-import { createPinia } from "pinia";
 
 const app = createApp(App)
 
@@ -23,5 +21,4 @@ app
 .use(createPinia())
 .mount("#app");
 
-export const toDosListStore = useToDoList();
-export const toDoUserStore = useToDoUsers();
+

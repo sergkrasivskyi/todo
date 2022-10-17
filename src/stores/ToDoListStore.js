@@ -1,4 +1,3 @@
-// import { createPinia, defineStore } from "pinia";
 import { defineStore } from "pinia";
 export const useToDoList = defineStore("toDosList", {
   state: () => {
@@ -17,6 +16,14 @@ export const useToDoList = defineStore("toDosList", {
     isFetching(state) {
       return state.fetching;
     },
+    // my getters
+    viewList(state) {
+      const viewedList = [...state.taskList];
+      return viewedList.splice(0, 10);
+    },
+    // getters: {
+    //   doneTodos: (state) => state.todos.filter((todo) => todo.done),
+    // },
   },
   actions: {
     async fetchNewToDoItem() {
@@ -51,6 +58,9 @@ export const useToDoList = defineStore("toDosList", {
 
       this.taskList[index] = { ...this.currenTask };
     },
+    setCurrenTask(task){
+      this.currenTask = {...task}
+    },
     deleteTask() {
       let id = this.currenTask.id;
       let index = this.taskList.findIndex((task) => task.id === id);
@@ -64,15 +74,7 @@ export const useToDoList = defineStore("toDosList", {
     },
   },
 
-  getters: {
-    viewList(state) {
-      const viewedList = [...state.taskList];
-      return viewedList.splice(0, 10);
-    },
-  },
-  // getters: {
-  //   doneTodos: (state) => state.todos.filter((todo) => todo.done),
-  // },
+  getters: {},
 });
 
 

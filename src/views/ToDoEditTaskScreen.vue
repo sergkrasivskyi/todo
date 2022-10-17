@@ -10,9 +10,9 @@
     <div class="container flow">
       <ToDoIconLogo class="center" space-type="200"></ToDoIconLogo>
       <ToDoTask
-        v-model:title="taskTitle"
-        v-model:description="taskDescription"
-        v-model:date="taskDate"
+        v-model:title="task.title"
+        v-model:description="task.description"
+        v-model:date="task.date"
       ></ToDoTask>
       <div class="buttons">
         <ToDoButton class="bg-accent-400 task-button"
@@ -27,7 +27,9 @@
 </template>
 
 <script>
-import { toDosListStore, toDoUserStore } from '@/main'
+import { mapStores, mapActions } from 'pinia'
+import { useToDoList } from '@/stores'
+
 export default {
   name: 'ToDoEditTaskScreen',
   data() {
@@ -41,13 +43,13 @@ export default {
   },
   methods: {
     updateTask() {
-      toDosListStore.editToDoItem()
+      this.toDosListStore.editToDoItem()
       this.updateAlert = "Updated!"
       setTimeout(this.$router.push, 1000, '/homescreen');
     },
     deleteTask() {
       this.deleteAlert = 'Deleted!'
-      toDosListStore.deleteTask()
+      this.toDosListStore.deleteTask()
       setTimeout(this.$router.push, 400, '/homescreen');
       
       // this.$emit('taskDeleted')
@@ -55,22 +57,27 @@ export default {
     },
     cancelEditPage() {
       // toDosList.currenTask = { ...toDosList.emptyTask }
-      toDosListStore.initializeTask()
+      this.toDosListStore.initializeTask()
       setTimeout(this.$router.push, 100, '/homescreen');
       // this.$emit('cancelEditPage')
-    }
+    },
+    // ...mapActions(useToDoList, { deleteTask: 'deleteTask' })
   },
   computed: {
-    taskTitle() {
-      return toDosListStore.currenTask.title
+    // taskTitle() {
+    //   return this.toDosListStore.currenTask.title
+    // },
+    // taskDescription() {
+    //   return this.toDosListStore.currenTask.description
+    // },
+    // taskDate() {
+    //   return this.toDosListStore.currenTask.date
+    // },
+    task() {
+      return { ...this.toDosListStore.currenTask }
     },
-    taskDescription() {
-      return toDosListStore.currenTask.description
-    },
-    taskDate() {
-      return toDosListStore.currenTask.date
-    },
-   
+
+    ...mapStores(useToDoList),
   }
 
 }

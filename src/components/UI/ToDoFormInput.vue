@@ -1,10 +1,13 @@
 <template>
   <div class="form-item">
-    <label for="formInput">
-      <div class="label-text">
-        <slot name="label-text" />
-      </div>
-      <input class="form-input" id="formInput"
+    
+    <label  for="formInput"
+    >
+    <div class="label-text"
+      :style="style">
+      <slot name="label-text" />
+    </div>
+    <input class="form-input" id="formInput"
       v-bind="$attrs"
       :value="modelValue"
       @change="inputChange">
@@ -17,6 +20,7 @@
 export default {
   name: 'ToDoFormInput',
   props: {
+    style: { type: Object },
     modelValue: { type: [Number, String, Date], default: '' },
   },
   data() {
@@ -42,8 +46,10 @@ export default {
   font-weight: 500;
   font-size: 1.25rem;
   line-height: 1.2;
-
   color: $primary-color-600;
+  &.auth {
+    color: $primary-color-200;
+  }
 }
 
 .form-input {

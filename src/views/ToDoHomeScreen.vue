@@ -25,10 +25,8 @@
 </template>
 
 <script>
-import {toDosListStore} from '@/main'
-// import { mapStores, mapState } from 'pinia'
-
-
+import { mapStores  } from 'pinia'
+import { useToDoList, useToDoUsers } from '@/stores'
 
 export default {
   name: 'ToDoHomeScreen',
@@ -38,6 +36,9 @@ export default {
   },
   methods: {
     goToSplashscreen() {
+      // Скидуємо значення на початкове, яке було до входу у App
+      this.toDoUserStore.currentUser.name = ''
+      // this.userStore.currentUser.name = ''
       this.$router.push('/')
     },
     addTask() {
@@ -47,21 +48,16 @@ export default {
     toEditTaskScreen(item) {
       // this.$emit('editTask', item)
       this.$router.push('/editscreen')
-      toDosListStore.currenTask = {...item}
+      this.toDosListStore.setCurrenTask(item)
     },
-    // tasksList() {
-    //   return toDosListStore.taskList;
-      // console.log(stores);
-    // }
 
   },
   computed: {
-      // other computed properties
-    // ...mapState(useToDoList, ['toDosList']),  
-    // ...mapStores(useToDoList, useToDoUsers),
-    // console.log(stores);
+    // ...mapState(useToDoList, ['listStore']),  
+    ...mapStores(useToDoList, useToDoUsers),
+    // console.log(listStore);
     tasksList() {
-      return toDosListStore.taskList;
+      return this.toDosListStore.taskList;
       // console.log(stores);
     }
   },

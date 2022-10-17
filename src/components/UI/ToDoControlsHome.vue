@@ -10,15 +10,16 @@
 </template>
 
 <script>
-import { toDosListStore } from '@/main'
+import { mapStores } from 'pinia'
+import { useToDoList } from '@/stores'
 
 export default {
   name: 'ToDoControlsHome',
   computed: {
     tasksAmount() {
-      return toDosListStore.taskList.length
-    
-    }
+      return this.toDosListStore.taskList.length
+    },
+    ...mapStores(useToDoList),
   }
   
 }

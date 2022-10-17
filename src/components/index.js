@@ -1,6 +1,4 @@
 
 import ToDoTask from "@/components/ToDoTask.vue";
-export default [
- 
-  ToDoTask,
-];
+import ToDoAuthorization from "@/components/ToDoAuthorization.vue";
+export default [ToDoTask, ToDoAuthorization];

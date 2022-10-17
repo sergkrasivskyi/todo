@@ -4,14 +4,21 @@
       <ToDoIconLogo />
       <h1>Make successful your day</h1>
       <h2 class="accent-200">Make small somethings to get big gift in your life</h2>
-      <ToDoButton class="bg-accent-400 button-splash"
-        @clickButton="goToHomeScreen"
-      >Start</ToDoButton>
+      <div class="authorize-form">
+        <ToDoAuthorization />
+        <ToDoButton class="bg-accent-400 button-splash"
+          @clickButton="goToHomeScreen"
+        >Start</ToDoButton>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapStores } from 'pinia'
+import { useContentStore, useToDoUsers } from '@/stores' 
+
+// import contentStore from '@/stores/ToDoContentStore'
 export default {
   name: 'SplashScreen',
   methods: {
@@ -20,8 +27,24 @@ export default {
     },
     goToHomeScreen() {
       // console.log(this.$router);
-      this.$router.push('/homescreen')
+
+      // console.log(event)
+      // const contentStore = useContentStore();
+      console.log(this.$pinia.state.value)
+      let userName = this.toDoUserStore.currentUser.name
+      let isExistUser = this.toDoUserStore.userList.find((user) => user.name === userName)
+      isExistUser ? this.$router.push('/homescreen') : console.log('User does not exist')
+      
     }
+  },
+  computed: {
+    // contentStore() {
+    //   return useContentStore();
+    // },
+    // toDoUserStore() {
+    //   return useToDoUsers()
+    // },
+    ...mapStores(useContentStore, useToDoUsers)
   }
 
 }
@@ -60,5 +83,9 @@ h2 {
 
   padding-inline: 2rem;
   padding-block: 3.5rem 4.6rem;
+}
+.authorize-form {
+  display: flex;
+  column-gap: 2rem;
 }
 </style>

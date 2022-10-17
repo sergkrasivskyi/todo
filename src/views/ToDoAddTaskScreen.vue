@@ -31,11 +31,11 @@
 // import { toDosList } from '@/main'
 // import stores  from '@/stores'
 
-// import { mapStores, mapState } from 'pinia'
-// import { useToDoList } from '@/stores/ToDoListStore'
+import { mapStores } from 'pinia'
+import { useToDoList } from '@/stores'
 // import { useToDoUsers } from '@/stores/ToDoUserStore'
 
-import { toDosListStore, toDoUserStore } from '@/main'
+// import { toDosListStore, toDoUserStore } from '@/main'
 
 export default {
   name: 'ToDoAddTaskScreen',
@@ -61,23 +61,23 @@ export default {
       // toDosList.addTodoItem(this.currenTask)
       // console.log(this.$router);
       this.addAlert = 'Added!'
-      toDosListStore.addTodoItem()
+      this.toDosListStore.addTodoItem()
+      console.log(this.toDosListStore);
       setTimeout(this.$router.push, 1000, '/homescreen');
       // console.log(toDosList.viewList)
     },
     cancelAddPage() {
       // toDosList.currenTask = { ...toDosList.emptyTask }
-      toDosListStore.initializeTask()
+      this.toDosListStore.initializeTask()
       setTimeout(this.$router.push, 100, '/homescreen');
       // this.$emit('cancelAddPage')
     },
-    // computed: {
-    //   // other computed properties
-    //   ...mapStores(useToDoList, useToDoUsers),
-    // },
-  
+    
   },
-
+  computed: {
+  //   // other computed properties
+    ...mapStores(useToDoList),
+  },
 
 }
 </script>
