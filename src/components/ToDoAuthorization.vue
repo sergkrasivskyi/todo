@@ -4,7 +4,7 @@
         placeholder="Enter your name" 
         :style="style"
       
-        @update:modelValue="autorize">
+        @update:modelValue="toVerify">
         <template  v-slot:label-text>
           Enter your name
         </template>
@@ -26,15 +26,16 @@ export default {
         color: "#fff",
       },
       name: ''
-
     }
   },
   computed: {
     ...mapStores(useToDoUsers)
   },
   methods: {
-    autorize(event) {
-      this.toDoUserStore.currentUser.name = event.target.value
+    toVerify(event) {
+      // Заноситься значення у UserStore для подальшої верифікації
+      // поки що верифікуємо лише за ім'ям
+      this.toDoUserStore.verifiedUser.name = event.target.value
     }
   }
 }

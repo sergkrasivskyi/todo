@@ -7,7 +7,7 @@
       <div class="authorize-form">
         <ToDoAuthorization />
         <ToDoButton class="bg-accent-400 button-splash"
-          @clickButton="goToHomeScreen"
+          @clickButton="gotoHomeScreen"
         >Start</ToDoButton>
       </div>
     </div>
@@ -15,36 +15,47 @@
 </template>
 
 <script>
-import { mapStores } from 'pinia'
-import { useContentStore, useToDoUsers } from '@/stores' 
+import { mapStores, mapState } from 'pinia'
+import { useToDoUsers } from '@/stores' 
 
 // import contentStore from '@/stores/ToDoContentStore'
 export default {
   name: 'SplashScreen',
+  state: () => {
+    
+    return {
+      
+    }
+  },
   methods: {
     startToDo() {
       this.$emit('startToDo')
     },
-    goToHomeScreen() {
+    gotoHomeScreen() {
       // console.log(this.$router);
 
       // console.log(event)
       // const contentStore = useContentStore();
-      console.log(this.$pinia.state.value)
-      let userName = this.toDoUserStore.currentUser.name
-      let isExistUser = this.toDoUserStore.userList.find((user) => user.name === userName)
-      isExistUser ? this.$router.push('/homescreen') : console.log('User does not exist')
+      // console.log(this.$pinia.state.value)
+      // Перенесли перевірку у методи toDoUserStore
+      // let userName = this.toDoUserStore.currentUser.name
+      // let isExistUser = this.toDoUserStore.userList.find((user) => user.name === userName)
+      // isExistUser ? this.$router.push('/homescreen') : console.log('User does not exist')
+
+      // інший метод
+      // this.toDoUserStore.isExistUser ? this.$router.push('/homescreen') : console.log('User does not exist')
       
+      // Ще один метод - за допомогою mapState - імпортували гетер 'isExistUser' 
+      // зі стору toDoUserStore, отримуємо доступ за допомогою this.isExistUser
+      this.isExistUser ? this.$router.push('/homescreen') : console.log('User does not exist')
+
     }
   },
   computed: {
-    // contentStore() {
-    //   return useContentStore();
-    // },
-    // toDoUserStore() {
-    //   return useToDoUsers()
-    // },
-    ...mapStores(useContentStore, useToDoUsers)
+      // Можна розгорнути весь toDoUserStore за допомогою 
+    // ...mapStores(useToDoUsers)
+    // Ми беремо гетер 'isExistUser' зі toDoUserStore
+    ...mapState(useToDoUsers, ['isExistUser']),
   }
 
 }
