@@ -17,7 +17,7 @@ export default {
   name: 'ToDoControlsHome',
   computed: {
     tasksAmount() {
-      return this.toDosListStore.taskList.length
+      return this.toDosListStore.tasksList.length
     },
     ...mapStores(useToDoList),
   }

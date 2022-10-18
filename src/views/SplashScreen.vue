@@ -27,6 +27,12 @@ export default {
       
     }
   },
+  computed: {
+    // Можна розгорнути весь toDoUserStore за допомогою 
+    // ...mapStores(useToDoUsers)
+    // Ми беремо гетер 'isExistUser' зі toDoUserStore
+    ...mapState(useToDoUsers, ['isExistUser']),
+  },
   methods: {
     startToDo() {
       this.$emit('startToDo')
@@ -50,13 +56,8 @@ export default {
       this.isExistUser ? this.$router.push('/homescreen') : console.log('User does not exist')
 
     }
-  },
-  computed: {
-      // Можна розгорнути весь toDoUserStore за допомогою 
-    // ...mapStores(useToDoUsers)
-    // Ми беремо гетер 'isExistUser' зі toDoUserStore
-    ...mapState(useToDoUsers, ['isExistUser']),
   }
+
 
 }
 </script>
