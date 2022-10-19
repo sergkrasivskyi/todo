@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper flow">
     <ToDoAppBar class="flex-head" space-type="0"
-    @clickLogo="goToSplashscreen()"
+        @clickLogo="goToSplashscreen()"
     ></ToDoAppBar>
     <div class="container flex-main">
       <ToDoControlsHome space-type="250" />
@@ -37,9 +37,9 @@ export default {
     // За допомогою mapState маємо доступ до state нашого store але ми не змінюємо ці значення
     // Щоб змінити, потрібно брати інший хелпер - mapWritableState, але зазвичай state 
     // не змінюють у компоненті, а використовуть для цього actions
-    ...mapState(useToDoList, ['tasksList', 'viewList', 'taskPosition', 'taskOnPage']),
+    ...mapState(useToDoList, ['viewList']),
     ...mapState(useToDoUsers, ['currentUser']),
-    ...mapStores(useToDoList, useToDoUsers),
+    // ...mapStores(useToDoList, useToDoUsers),
     // console.log(listStore);
     // tasksList() {
       //   return this.toDosListStore.tasksList;
@@ -51,10 +51,11 @@ export default {
       this.loadMore(15)
     },
     goToSplashscreen() {
-      // Скидуємо значення на початкове, яке було до входу у App
+      // Скидуємо значення currentUser на початкове, яке було до входу у App
       // this.toDoUserStore.currentUser.name = ''
-      this.currentUser.name = ''
-      // this.userStore.currentUser.name = ''
+      // за допомогою action самого userStore
+      this.saveUserTodos(this.currentUser)
+      this.resetCurrentUser()
       this.$router.push('/')
     },
     addTask() {
@@ -70,7 +71,8 @@ export default {
       this.loadTodos()
     },
     // Цей хелпер mapActions використовуємо у methods, інші у computed
-    ...mapActions(useToDoList, ['loadTodos', 'setCurrenTask', 'loadMore']), 
+    ...mapActions(useToDoList, ['loadTodos', 'setCurrenTask', 'loadMore', 'saveUserTodos']), 
+    ...mapActions(useToDoUsers, ['resetCurrentUser']), 
   },
 }
 </script>

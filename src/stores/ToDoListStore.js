@@ -1,4 +1,5 @@
-import { defineStore } from "pinia";
+import { defineStore, mapActions, mapStores } from "pinia";
+import { useToDoUsers } from "@/stores"; 
 export const useToDoList = defineStore("toDosList", {
   state: () => {
     return {
@@ -7,14 +8,15 @@ export const useToDoList = defineStore("toDosList", {
       fetching: false,
       taskPosition: 0,
       taskOnPage: 5,
-      startLIst: [],
+      // startList: [],
       tasksList: [],
+
     };
   },
   getters: {
-    results(state) {
-      return state.newToDoItem;
-    },
+    // results(state) {
+    //   return state.newToDoItem;
+    // },
     isFetching(state) {
       return state.fetching;
     },
@@ -28,24 +30,56 @@ export const useToDoList = defineStore("toDosList", {
     // },
   },
   actions: {
+    saveUserTodos(user) {
+    // Зберігаємо tasksList, додаємо UserId користувача currentUser зі toDoUserStore
+      this.userTasksList = [];
+      localStorage.setItem("name", user.name);
+    },
+
     loadMore(amount) {
       this.taskOnPage = amount;
     },
-
+    //  Звичайний GET запрос
     loadTodos() {
       fetch("https://dummyjson.com/todos")
-      .then((res) => res.json())
-      .then(console.log);
+        .then((res) => res.json())
+        .then(console.log);
     },
-    async fetchNewToDoItem() {
+    // асинхронний GET запрос
+    // усі - https://dummyjson.com/todos
+    // Запрос для user з id: 5
+    //  https://dummyjson.com/todos/user/5
+
+    // async fetchToDoStartList() {
+    //   this.fetching = true;
+    //   const response = await fetch("https://dummyjson.com/todos");
+    //   try {
+    //     const result = await response.json();
+    //     // отримуємо todos для усіх users та записуємо у startList
+    //     this.startList = [...result.todos];
+    //   } catch (err) {
+    //     this.startList = [];
+    //     console.error("Error loading StartList:", err);
+    //     return err;
+    //   }
+    //   this.fetching = false;
+    // },
+    async fetchUserTaskList(user) {
       this.fetching = true;
-      const response = await fetch("https://dummyjson.com/todos");
+      const response = await fetch(`https://dummyjson.com/todos/user/${user.id}`);
       try {
         const result = await response.json();
-        this.newToDoItem = result.items;
+        // отримуємо todos для усіх users та записуємо у startList
+        this.tasksList = [...result.todos];
+        this.tasksList.forEach((task) => {
+          task.title = task.todo;
+          delete task.todo;
+        });
+        // this.tasksList = [...this.startList];
+        // this.tasksList = [...result.todos];
       } catch (err) {
-        this.newToDoItem = "";
-        console.error("Error loading new todoItems:", err);
+        this.tasksList = [];
+        console.error("Error loading tasksList:", err);
         return err;
       }
       this.fetching = false;
@@ -69,8 +103,8 @@ export const useToDoList = defineStore("toDosList", {
 
       this.tasksList[index] = { ...this.currenTask };
     },
-    setCurrenTask(task){
-      this.currenTask = {...task}
+    setCurrenTask(task) {
+      this.currenTask = { ...task };
     },
     deleteTask() {
       let id = this.currenTask.id;

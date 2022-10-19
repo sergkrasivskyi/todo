@@ -15,7 +15,7 @@
 
 <script>
 // import { toDoUserStore } from '@/main'
-import { mapStores } from 'pinia'
+import { mapStores, mapActions } from 'pinia'
 // import stores from './stores'
 import { useToDoUsers } from '@/stores'
 export default {
@@ -29,14 +29,15 @@ export default {
     }
   },
   computed: {
-    ...mapStores(useToDoUsers)
+    // ...mapStores(useToDoUsers)
   },
   methods: {
-    toVerify(event) {
+    ...mapActions(useToDoUsers, ['toVerify']),
+    // toVerify(event) {
       // Заноситься значення у UserStore для подальшої верифікації
       // поки що верифікуємо лише за ім'ям
-      this.toDoUserStore.verifiedUser.name = event.target.value
-    }
+    //   this.toDoUserStore.verifiedUser.name = event.target.value
+    // }
   }
 }
 </script>

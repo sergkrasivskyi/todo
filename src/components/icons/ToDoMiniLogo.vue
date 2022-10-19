@@ -38,6 +38,7 @@ export default {
 <style lang="scss" scoped>
 .mini-logo {
   display: inline-block;
+  cursor: pointer;
   // background-color: tomato;
 }
 </style>

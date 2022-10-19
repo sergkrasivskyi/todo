@@ -15,8 +15,9 @@
 </template>
 
 <script>
-import { mapStores, mapState } from 'pinia'
+import { mapStores, mapState, mapActions } from 'pinia'
 import { useToDoUsers } from '@/stores' 
+import { useToDoList } from '@/stores' 
 
 // import contentStore from '@/stores/ToDoContentStore'
 export default {
@@ -27,13 +28,17 @@ export default {
       
     }
   },
+
   computed: {
     // Можна розгорнути весь toDoUserStore за допомогою 
     // ...mapStores(useToDoUsers)
     // Ми беремо гетер 'isExistUser' зі toDoUserStore
     ...mapState(useToDoUsers, ['isExistUser']),
+  
   },
   methods: {
+    ...mapActions(useToDoList, ['fetchToDoStartList', 'fetchUserTaskList']),
+
     startToDo() {
       this.$emit('startToDo')
     },
@@ -53,7 +58,20 @@ export default {
       
       // Ще один метод - за допомогою mapState - імпортували гетер 'isExistUser' 
       // зі стору toDoUserStore, отримуємо доступ за допомогою this.isExistUser
-      this.isExistUser ? this.$router.push('/homescreen') : console.log('User does not exist')
+      // this.isExistUser 
+      // ? this.$router.push('/homescreen') 
+      // : console.log('User does not exist')
+      // Тут ми асинхронно завантажуємо список todos
+      //  з сервера, незалежно від user (для тесту)
+        // if (this.isExistUser) {
+        //   this.$router.push('/homescreen') 
+        //   this.fetchToDoStartList(user);
+        // }
+      // Тут асинхронно завантажуємо список todos для конкретного користувача
+        if (this.isExistUser) {
+          this.$router.push('/homescreen') 
+          this.fetchUserTaskList(this.isExistUser);
+        }
 
     }
   }
